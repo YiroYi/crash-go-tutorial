@@ -2,47 +2,68 @@ package main
 
 import "fmt"
 
-type contactInfo struct {
-	email   string
-	zipCode int
-}
-
-type person struct {
-	firstName string
-	lastName  string
-	contactInfo
-}
-
 func main() {
 	// cards := newDeck()
 	// cards.shuffle()
 	// cards.print()
 
-	contactInfo := contactInfo{email: "yi@mail.com", zipCode: 57170}
+	// Map syntax one
+	colors := map[string]string{
+		"red":   "#ff000",
+		"green": "#4bf745",
+	}
 
-	// Syntax One
-	yiro := person{"Yiro", "Yi", contactInfo}
+	// Map syntax two
+	var newColors map[string]string
 
-	// Syntax Two
-	yujin := person{firstName: "Yujin", lastName: "Cho", contactInfo: contactInfo}
+	// Map syntax three
+	newNewColors := make(map[string]string)
+	newNewColors["black"] = "#ffff"
+	delete(newNewColors, "black")
 
-	// Syntax Three
-	var kripto person
-	kripto.firstName = "Kripto"
-	kripto.lastName = "Yi"
-	kripto.contactInfo = contactInfo
-
-	yiroPointer := &yiro
-	yiroPointer.updateName("Yiro Yuzin")
-	yiro.print()
-	yujin.print()
-	kripto.print()
+	fmt.Println(colors)
+	fmt.Println(newColors)
+	fmt.Println(newNewColors)
 }
 
-func (pointerToPerson *person) updateName(newFirstName string) {
-	(*pointerToPerson).firstName = newFirstName
-}
+// Structs
 
-func (p person) print() {
-	fmt.Printf("%+v", p)
-}
+// type contactInfo struct {
+// 	email   string
+// 	zipCode int
+// }
+
+// type person struct {
+// 	firstName string
+// 	lastName  string
+// 	contactInfo
+// }
+
+//inside main {
+// contactInfo := contactInfo{email: "yi@mail.com", zipCode: 57170}
+
+// 	// Syntax One
+// 	yiro := person{"Yiro", "Yi", contactInfo}
+
+// 	// Syntax Two
+// 	yujin := person{firstName: "Yujin", lastName: "Cho", contactInfo: contactInfo}
+
+// 	// Syntax Three
+// 	var kripto person
+// 	kripto.firstName = "Kripto"
+// 	kripto.lastName = "Yi"
+// 	kripto.contactInfo = contactInfo
+
+// 	yiro.updateName("Yiro Yuzin")
+// 	yiro.print()
+// 	yujin.print()
+// 	kripto.print()
+//}
+
+// func (pointerToPerson *person) updateName(newFirstName string) {
+// 	(*pointerToPerson).firstName = newFirstName
+// }
+
+// func (p person) print() {
+// 	fmt.Printf("%+v", p)
+// }
