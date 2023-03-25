@@ -11,19 +11,18 @@ func main() {
 	colors := map[string]string{
 		"red":   "#ff000",
 		"green": "#4bf745",
+		"white": "#4ffff",
 	}
 
-	// Map syntax two
-	var newColors map[string]string
-
-	// Map syntax three
-	newNewColors := make(map[string]string)
-	newNewColors["black"] = "#ffff"
-	delete(newNewColors, "black")
-
+	printMap(colors)
 	fmt.Println(colors)
-	fmt.Println(newColors)
-	fmt.Println(newNewColors)
+}
+
+func printMap(c map[string]string) {
+	//for key, value := range c {
+	for color, hex := range c {
+		fmt.Println(" Hex code for", color, "is", hex)
+	}
 }
 
 // Structs
@@ -66,4 +65,19 @@ func main() {
 
 // func (p person) print() {
 // 	fmt.Printf("%+v", p)
+// }
+
+// Maps
+
+// Map syntax two
+// var newColors map[string]string
+
+// Map syntax three
+// newNewColors := make(map[string]string)
+// newNewColors["black"] = "#ffff"
+// delete(newNewColors, "black")
+
+// fmt.Println(colors)
+// fmt.Println(newColors)
+// fmt.Println(newNewColors)
 // }
