@@ -1,29 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+)
 
 func main() {
-	// cards := newDeck()
-	// cards.shuffle()
-	// cards.print()
+	resp, err := http.Get("http://google.com")
 
-	// Map syntax one
-	colors := map[string]string{
-		"red":   "#ff000",
-		"green": "#4bf745",
-		"white": "#4ffff",
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
 	}
 
-	printMap(colors)
-	fmt.Println(colors)
+	io.Copy(os.Stdout, resp.Body)
 }
 
-func printMap(c map[string]string) {
-	//for key, value := range c {
-	for color, hex := range c {
-		fmt.Println(" Hex code for", color, "is", hex)
-	}
-}
+// Cards
+// cards := newDeck()
+// cards.shuffle()
+// cards.print()
 
 // Structs
 
@@ -39,6 +37,7 @@ func printMap(c map[string]string) {
 // }
 
 //inside main {
+
 // contactInfo := contactInfo{email: "yi@mail.com", zipCode: 57170}
 
 // 	// Syntax One
@@ -80,4 +79,49 @@ func printMap(c map[string]string) {
 // fmt.Println(colors)
 // fmt.Println(newColors)
 // fmt.Println(newNewColors)
+// }
+
+// Map syntax one
+// colors := map[string]string{
+// 	"red":   "#ff000",
+// 	"green": "#4bf745",
+// 	"white": "#4ffff",
+// }
+
+// printMap(colors)
+// fmt.Println(colors)
+// }
+
+// func printMap(c map[string]string) {
+// //for key, value := range c {
+// for color, hex := range c {
+// 	fmt.Println(" Hex code for", color, "is", hex)
+// }
+
+// Interface
+// type bot interface {
+// 	getGreeting() string
+// }
+
+// type englishBot struct{}
+// type spanishBot struct{}
+
+// func main() {
+// 	eb := englishBot{}
+// 	sb := spanishBot{}
+
+// 	printGreeting(eb)
+// 	printGreeting(sb)
+// }
+
+// func printGreeting(b bot) {
+// 	fmt.Println(b.getGreeting())
+// }
+
+// func (englishBot) getGreeting() string {
+// 	return "Hi There"
+// }
+
+// func (spanishBot) getGreeting() string {
+// 	return "Hola"
 // }
