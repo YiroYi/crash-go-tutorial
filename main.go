@@ -2,20 +2,41 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"net/http"
-	"os"
+	"time"
 )
 
 func main() {
-	resp, err := http.Get("http://google.com")
-
-	if err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
+	links := []string{
+		"http://google.com",
+		"http://stackoverflow.com",
+		"http://golang.org",
 	}
 
-	io.Copy(os.Stdout, resp.Body)
+	c := make(chan string)
+
+	for _, link := range links {
+		go checkLink(link, c)
+	}
+
+	for l := range c {
+		go func(link string) {
+			time.Sleep(5 * time.Second)
+			checkLink(link, c)
+		}(l)
+	}
+}
+
+func checkLink(link string, c chan string) {
+	_, error := http.Get(link)
+	if error != nil {
+		fmt.Println(link, "might be down")
+		c <- link
+		return
+	}
+
+	fmt.Println(link, "Is working correct")
+	c <- link
 }
 
 // Cards
@@ -124,4 +145,15 @@ func main() {
 
 // func (spanishBot) getGreeting() string {
 // 	return "Hola"
+// }
+
+//func main() {
+// 	resp, err := http.Get("http://google.com")
+
+// 	if err != nil {
+// 		fmt.Println("Error:", err)
+// 		os.Exit(1)
+// 	}
+
+// 	io.Copy(os.Stdout, resp.Body)
 // }
